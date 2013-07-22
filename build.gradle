@@ -25,7 +25,7 @@ apply plugin: 'js'
 apply plugin:'base'
 
 def appName = "newsletter"
-def version = "0.0.2"
+def version = "0.0.3"
 def jsSrcDir = 'public/js'
 def buildDir = 'public/build'
 
@@ -65,7 +65,7 @@ task appendJQuery(dependsOn: 'combineSrc') {
     doLast{
         String backboneSrc = file(new File("${projectDir}/public/build/${appName}-src.js")).text
         new File("${projectDir}/public/build/${appName}-jqueryWraped.js").withWriter{ out ->
-            out << "(function(\$){" + backboneSrc + "})(jQuery); \n"
+            out << "(function(\$,NEWSLETTER){" + backboneSrc + "})(jQuery,NEWSLETTER); \n"
         }
     }
 }

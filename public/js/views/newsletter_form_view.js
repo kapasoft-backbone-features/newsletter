@@ -1,6 +1,13 @@
 var NewsletterView = Backbone.View.extend({
 
-    render: function(){
+    render: function(config){
+        //hook to pass value in handlebars template
+        Handlebars.registerHelper('buttontext', function() {
+            return new Handlebars.SafeString(
+                config.button
+            );
+        });
+
         this.$el.html(Handlebars.templates.newsletter());
 
         this.delegateEvents({//ensures DOM elements always get events they suppose to
